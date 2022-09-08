@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  my invites
+{% endblock title %}
+
+{% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    {% if is_empty %}
+      <h1>No invitations here..</h1>
+    {% endif %}
+    {% for obj in queryset %}
+      <div class="ui segment">
+          <div class="ui grid">
+              <div class="row">
+                  <div class="three wide column">
+                      <img class="ui small circular image" src="{{obj.image.url}}">
+                  </div>
+                  <div class="thirteen wide column">
+                      <h3>{{obj.user}}</h3>
+                      <p>{{obj.bio}}</p>
+                      <a href="{{obj.get_absolute_url}}"><button class="ui primary button w-big mb-5">See profile</button></a>
+                      <form action="{% url 'users:accept_invitation' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="profile_pk" value="{{obj.pk}}">
+                          <button type="submit" class="ui positive basic button w-big mb-5">
+                              <i class="check icon"></i>
+                              Accept invite
+                          </button>
+                      </form>
+                      <form action="{% url 'users:reject_invitation' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="profile_pk" value="{{obj.pk}}">
+                          <button type="submit" class="ui negative basic button w-big mb-5">
+                              <i class="close icon"></i>
+                              Reject invite
+                          </button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+    {% endfor %}
+{% endblock content %}

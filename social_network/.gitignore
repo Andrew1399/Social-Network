@@ -1,0 +1,13 @@
+__pycache__/
+
+.idea
+posts/migrations
+users/migrations
+music/migrations
+gallery/migrations
+messenger/migrations
+images
+songs
+.env
+venv
+main.py

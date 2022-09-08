@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  web:
+    build: .
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/social_network
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    links:
+      - pg_db:pg_db
+    depends_on:
+      - pg_db
+      - migration
+
+  pg_db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mymindishappy
+      - POSTGRES_DB=network
+    ports:
+      - "5432:5432"
+  migration:
+    build: .
+    command: python manage.py migrate
+    volumes:
+      - .:/social_network
+    depends_on:
+      - pg_db
+volumes:
+  postgres_data:

@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+<!-- Load static -->
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}Download{% endblock title %}
+
+{% block content %}
+{% bootstrap_css %}
+<div class="col-md-12">
+    <!-- Create form for image -->
+    <form class="form-horizontal" enctype="multipart/form-data" method="post" >
+        {% csrf_token %}
+        <!-- Set all field and labels -->
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="">{{ field.label }}
+                </label>
+                 {{ field }}
+            </div>
+        {% endfor %}
+        <!-- Buttons save and back -->
+        <button class="btn btn-primary" value="Load" type="submit">Load</button>
+        <a href="{% url 'gallery:gallery' %}" class="btn btn-link">Back</a>
+     </form>
+</div>
+{% endblock content %}

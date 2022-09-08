@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}{{ album }}{% endblock %}
+
+{% block content %}
+{% bootstrap_css %}
+<div class="container-fluid songs-container">
+	<div class="row">
+
+
+		<!-- Left Album Info -->
+		<div class="col-sm-4 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<a href="{% url 'music:detail' album.id %}">
+						{% if album.logo %}
+							<img src="{{ album.logo.url }}" class="img-responsive center-block">
+						{% else %}
+							<h3>No image to display</h3>
+						{% endif %}
+					</a>
+					<div class="album-info">
+						<h1>{{ album.title }}</h1>
+						<h2>{{ album.artist }}</h2>
+						<p>{{ album.year }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Right Song Info -->
+		<div class="col-sm-8 col-md-9">
+			<ul class="nav nav-pills" style="margin-bottom:10px;">
+				<li role="presentation" class="{% if link_detail %}active{% endif %}">
+					<a class="btn btn-default" href="{% url 'music:detail' pk=album.id %}">View All</a></li>
+				<li role="presentation" class="{% if link_song_create %}active{% endif %}">
+					<a class="btn btn-default" href="{% url 'music:song-add' pk=album.id %}">Add New Song</a></li>
+				<li role="presentation" class="{% if link_album_update %}active{% endif %}">
+					<a class="btn btn-default" href="{% url 'music:album-update' pk=album.id %}">Edit Album Info</a></li>
+				<li role="presentation" class="{% if link_song_update %}active{% endif %}">
+					<a class="btn btn-default" href="#">Edit Song Info</a></li>
+			</ul>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					{% block detail_body %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+{% endblock %}

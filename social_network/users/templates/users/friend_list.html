@@ -1,0 +1,7 @@
+
+{% load static %}
+{% block content %}
+    {% for friend in object_list %}
+       {{friend.first_name}}
+    {% endfor %}
+{% endblock content %}

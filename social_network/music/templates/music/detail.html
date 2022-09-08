@@ -1,0 +1,66 @@
+{% extends 'music/detail-base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block albums_active %}active{% endblock %}
+
+<!-- Right Song Info -->
+{% block content %}
+{% bootstrap_css %}
+
+<h3>{{ header_text }}</h3>
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<table class="table">
+	<thead>
+		<tr>
+			<td>Track #</td>
+			<td>Title</td>
+			<td>Favorite</td>
+			<td>Play</td>
+			<td>Edit</td>
+			<td>Actions</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for song in album.song_set.all %}
+			<tr>
+				<td>{{ song.track_number }}</td>
+				<td>{{ song.title }}</td>
+				<td>
+					<a href="{% url 'music:song-favorite' pk=album.id song_id=song.id %}" class="btn-favorite">
+						<span class="glyphicon glyphicon-star {% if song.is_favorite %}active{% endif %}"></span>
+					</a>
+				</td>
+				<td>
+					{% if song.file %}
+						<audio controls>
+							<source src="{{ song.file.url }}">
+						</audio>
+					{% else %}
+						No file uploaded.
+					{% endif %}
+				</td>
+				<td>
+					<a href="{% url 'music:song-update' pk=album.id song_id=song.id %}">
+						<button type="button" class="btn btn-warning btn-xs">
+							<span class="glyphicon glyphicon-pencil"> Edit</span>
+						</button>
+					</a>
+				</td>
+				<td>
+					<form action="{% url 'music:song-delete' pk=album.id song_id=song.id %}" method="post" style="display:inline;">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-danger btn-xs">
+							<span class="glyphicon glyphicon-remove"> Delete</span>
+						</button>
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<a class="btn btn-primary" href="{% url 'music:song-add' pk=album.id %}">Add A New Song</a></li>
+
+{% endblock %}

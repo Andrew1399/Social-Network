@@ -1,0 +1,121 @@
+ ul.errorlist {
+	padding-left: 0px;
+}
+
+ul.errorlist > li {
+	list-style:none;
+}
+
+.glyphicon-star {
+	color: #CCCCCC;
+}
+
+.glyphicon-star.active {
+	color: #FDB230;
+}
+
+
+/* My custom styling */
+.album-info {
+	text-align: center;
+}
+
+.search-album-cover {
+	height:120px;
+	width:120px;
+}
+
+.caption {
+	text-align: center;
+}
+
+h2 {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+h4 {
+	font-size: 16px;
+}
+
+thead {
+	font-weight: bold;
+}
+
+body{
+    margin-top:20px;
+    backgroundColor:#eee;
+}
+.home-5-bg {
+    background: #1E90FF;
+    position: relative;
+    background-size: cover;
+    height: 50vh;
+    background-position: center center;
+}
+
+.section {
+    position: relative;
+}
+
+.home-5-content {
+  z-index: 1;
+  position: relative;
+}
+
+.bg-overlay {
+    background-color: #000;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.home-center {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.home-desc-center {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.home-5-content {
+    z-index: 1;
+    position: relative;
+}
+
+.text-white-70 {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.f-15 {
+    font-size: 15px;
+}
+
+.home-5-bg #particles-js {
+    z-index: 1!important;
+position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#particles-js {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-image: url("");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	background: #6819e8; /* Old browsers */
+	background: -moz-linear-gradient(left, #6819e8 0%, #7437d0 35%, #615fde 68%, #6980f2 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #6819e8 0%,#7437d0 35%,#615fde 68%,#6980f2 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #6819e8 0%,#7437d0 35%,#615fde 68%,#6980f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6819e8', endColorstr='#6980f2',GradientType=1 ); /* IE6-9 */
+}
+

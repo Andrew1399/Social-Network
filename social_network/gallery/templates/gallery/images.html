@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+<!-- Load static -->
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}Gallery{% endblock title %}
+<!-- Add styles -->
+{% block head %}
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+{% endblock head %}
+
+{% block content %}
+{% bootstrap_css %}
+  <script src="{% static 'load_more.js' %}"> </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <div class="container-fluid">
+  <div class="px-lg-5">
+    <div class="row py-5">
+      <div class="col-lg-12 mx-auto">
+        <div class="text-white p-5 shadow-sm rounded banner">
+          <h1 class="display-4">My photo gallery</h1>
+          <p class="lead">Upload your cool images to make your gallery much better <a href="https://bootstrapious.com/snippets" class="text-reset">
+                        </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Gallery item -->
+      {% for image in object_list %}
+      <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+        <div class="bg-white rounded shadow-sm"><img src="{{image.path}}" alt="" class="img-fluid card-img-top">
+          <div class="p-4">
+            <h5> <a href="#" class="text-dark">{{image.name}}</a></h5>
+            <p class="small text-muted mb-0">Loaded: {{image.time}}</p>
+            <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+              <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">Size: {{image.size}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- End -->
+  </div>
+  <div class="py-5 text-right"><a href="{% url 'gallery:download' %}" class="btn btn-primary px-5 py-3 text-uppercase">Download</a></div>
+</div>
+</div>
+
+{% endblock content %}

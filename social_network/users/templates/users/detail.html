@@ -1,0 +1,155 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}
+  profile detail
+{% endblock title %}
+
+{% block content %}
+{% bootstrap_css %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{{object.image.url}}" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>{{object.user}}</h4>
+                      <p class="text-secondary mb-1">{{object.status}}</p>
+                      <p class="text-muted font-size-sm">{{object.country}}</p>
+                      {% if object.user not in rel_receiver and object.user not in rel_sender %}
+                        <form action="{% url 'users:send_invite' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="profile_pk" value={{object.pk}}>
+                          <button type="submit" class="btn btn-outline-success"><i class="plus square icon"></i>Add to friends</button>
+                        </form>
+                      {% endif %}
+
+                      {% if object.user in rel_receiver and request.user not in object.friends.all %}
+                        <a class="btn btn-secondary btn-lg disabled"><i class="user icon"></i>Waiting for approval</a>
+                      {% endif %}
+
+                      {% if request.user in object.friends.all %}
+                        <form action="{% url 'users:remove_friend' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="profile_pk" value={{object.pk}}>
+                          <button type="submit" class="btn btn-danger"><i class="minus square icon"></i>Remove from friends</button>
+                        </form>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"> <img src="https://img.icons8.com/external-stick-figures-gan-khoon-lay/25/000000/external-friend-teamwork-stick-figures-gan-khoon-lay.png"/> Number of friends</h6>
+                    <span class="text-secondary">{{profile.get_friends_list}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"> <img src="https://img.icons8.com/external-soft-fill-juicy-fish/25/000000/external-posts-microservices-soft-fill-soft-fill-juicy-fish.png"/>  Number of posts</h6>
+                    <span class="text-secondary">{{profile.get_posts_list}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><img src="https://img.icons8.com/dotty/25/000000/give-gift.png"/>Number of likes given</h6>
+                    <span class="text-secondary"> {{profile.get_given_likes_list}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><img src="https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-like-modern-dating-flaticons-flat-flat-icons-3.png"/> Number of likes received</h6>
+                    <span class="text-secondary">{{profile.get_received_likes_list}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">First name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{object.first_name}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Last name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{object.last_name}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{object.email}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Bio</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{object.bio}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Country</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{object.country}}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row gutters-sm">
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3">Friends</h6>
+                      {% for friend in profile.get_friends %}
+                        <div class="media">
+                          <div class="media-left media-middle">
+                            <a href="{{friend.profile.get_absolute_url}}"><img class="media-object img-circle img-thumbnail thumb48" src="{{friend.profile.image.url}}" alt="Contact"></a>
+                          </div>
+                          <div class="media-body pt-sm">
+                            <div class="text-bold">{{friend}}
+                              <div class="text-sm text-muted">{{friend.last_login}}</div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3">Latest posts</h6>
+                      {% for post in profile.get_posts %}
+                        <div class="ui segment">{{post.content}}</div>
+                      {% endfor %}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock content %}

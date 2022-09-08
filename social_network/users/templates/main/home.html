@@ -1,0 +1,132 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block title %}
+  Home
+{% endblock title %}
+
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <title>Messenger</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+  <div class="ui container">
+    <img class="ui big right floated image" src="https://lifeposi.ru/wp-content/uploads/2021/08/adobestock_105395097-3-scaled-1.jpeg" alt="messenger logo">
+  </div>
+</div>
+
+<div class="ui middle container">
+  <h1> Be together,
+    <p>whenever.</p>
+  </h1>
+  <h4>
+    A simple way to text, communicate and
+    <p>plan things all in one place.</p>
+  </h4>
+
+  <h4>
+    <p>Welcome to TeamCozy!</p>
+    <p>Here you can sign up and start your unforgettable journey!</p>
+    <p>You can do plenty of things with us!</p>
+    <p>You can get an invaluable experience of communicating!</p>
+    <p>You can do whatever you want!</p>
+<!--  Maybe button better  -->
+    {% if request.user.is_authenticated %}
+      <p>Sign up right now and get started your journey!</p>
+      <p>Or sign in if you already have an account...</p>
+    {% else %}
+     <p><a href="{% url 'account_signup' %}">Sign up</a> right now and get started your journey!</p>
+      Or <a href="{% url 'account_login' %}">sign in</a> if you already have an account...
+    {% endif %}
+  </h4>
+
+<div class="ui fluid bottom container">
+  <h1 style="text-align: center; padding: 70px; margin: 10px;">
+    <p>So many ways to connect with all your friends</p>
+  </h1>
+
+  <div class="ui four column grid">
+    <div class="column">
+    <div class="ui centered card">
+      <div class="image">
+        <img style="border-radius: 30px;" src="https://static.twentyoverten.com/5d94b04c6e5bfa373f3b2a52/9yXLjJ1NXvX/iStock-913582690.jpg" alt="pic 1">
+      </div>
+      <div class="content">
+        <a class="center aligned header">Communicate with your friends</a>
+
+        <div class="center aligned description">
+          Easily find your friends and start communication
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="column">
+      <div class="ui centered card">
+        <div class="image">
+          <img style="border-radius: 30px;" src="https://avatars.mds.yandex.net/i?id=f7087555174774a0b566b2202d3da67e-5869038-images-thumbs&n=13" alt="pic 2">
+        </div>
+        <div class="content">
+          <a class="center aligned header">Establish contacts and have fun</a>
+          <div class="center aligned description">
+            See people, send an invitation and communicate. It's the closest to hanging out.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="ui centered card">
+        <div class="image">
+          <img style="border-radius: 30px;" src="https://avatars.mds.yandex.net/i?id=a85ff898c45a8763021ae68b5e961a78-5877464-images-thumbs&n=13" alt="pic 3">
+        </div>
+        <div class="content">
+          <a class="center aligned header">Upload your posts</a>
+          <div class="center aligned description">
+            Write your posts, choose whatever your want and then upload so that other people see it
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="ui centered card">
+        <div class="image">
+          <img style="border-radius: 30px;" src="https://thumbs.dreamstime.com/b/digital-picture-gallery-close-up-laptop-pictures-blurry-dark-background-media-photo-double-exposure-164122614.jpg" alt="pic 4">
+        </div>
+        <div class="content">
+          <a class="center aligned header">Create your gallery</a>
+          <div class="center aligned description">
+           Upload any images in your gallery and share it with your friends
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script>
+  $('.ui.checkbox')
+      .checkbox();
+</script>
+<script>
+  $('.ui.dropdown')
+      .dropdown();
+</script>
+
+</body>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+      console.log('working')
+    })
+</script>
+{% endblock scripts %}

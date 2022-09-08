@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  invite friends
+{% endblock title %}
+
+{% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<ul>
+    {% for obj in object_list %}
+      <div class="ui segment">
+          <div class="ui grid">
+              <div class="row">
+                  <div class="three wide column">
+                      <img class="ui small circular image" src="{{obj.image.url}}">
+                  </div>
+                  <div class="thirteen wide column">
+                      <h3>{{obj.user}}</h3>
+                      <p>{{obj.bio}}</p>
+                      <a href="{{obj.get_absolute_url}}"><button class="ui primary button w-big mb-5">See profile</button></a>
+                      {% if obj.user not in rel_receiver and obj.user not in rel_sender %}
+                            <form action="{% url 'users:send_invite' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="profile_pk" value={{obj.pk}}>
+                                <button type="submit" class="ui positive basic button mb-5 w-big"><i class="plus square icon"></i>Add to friends</button>
+                            </form>
+                        {% endif %}
+
+                      {% if obj.user in rel_receiver and request.user not in obj.friends.all %}
+                          <button class="ui disabled button mb-5 w-big"><i class="user icon"></i>Waiting for approval</button>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+    {% endfor %}
+</ul>
+{% endblock content %}

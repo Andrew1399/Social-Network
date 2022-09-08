@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% block songs_active %}active{% endblock %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}Results{% endblock %}
+
+{% block content %}
+{% bootstrap_css %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+<div class="albums-container container-fluid">
+	<!-- Songs -->
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>Search for: {{ request.GET.q }}</h3>
+		</div>
+
+		<div class="col-sm-8 col-md-9">
+
+			{% if results %}
+			<table class="table">
+				<thead>
+					<td>Cover</td>
+					<td>Album</td>
+					<td>Title</td>
+					<td>Play</td>
+					<td>Favorite</td>
+				</thead>
+
+				<tbody>
+					{% for song in results %}
+					<tr>
+						<td>
+							{% if song.album.logo %}
+								<img src="{{ song.album.logo.url }}" class="ui medium image">
+							{% else %}
+								No image to display.
+							{% endif %}
+						</td>
+						<td>
+							<h4>{{ song.album.title }}</h4>
+							<br>{{ song.album.artist }}
+							<br>{{ song.album.year }}
+						</td>
+						<td>
+							{{ song.title }}
+						</td>
+						<td>
+							{% if song.file %}
+							<audio controls>
+								<source src="{{ song.file.url }}">
+							</audio>
+							{% else %}
+								No file uploaded.
+							{% endif %}
+						</td>
+						<td>
+							<span class="glyphicon glyphicon-star {% if song.is_favorite %}active{% endif %}"></span>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			{% else %}
+			<p>No results were found.</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

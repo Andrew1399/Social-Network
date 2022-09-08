@@ -1,0 +1,10 @@
+<span class="ks-avatar ks-offline">
+    <a href="{{message.from_user.profile.get_absolute_url}}"><img src="{{ message.from_user.profile.image.url }}" width="36" height="36" class="rounded-circle"></a>
+</span>
+<div class="ks-body">
+    <div class="ks-header">
+        <span class="ks-name">{{ message.from_user.profile.get_screen_name }}</span>
+        <span class="ks-datetime">{{ message.date|date:'N d G:i' }}</span>
+    </div>
+    <div class="ks-message">{{ message.message }}</div>
+</div>

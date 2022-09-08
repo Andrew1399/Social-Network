@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}{% trans 'Inbox' %}{% endblock %}
+
+{% block page_header %}{% trans 'Inbox' %}{% endblock %}
+
+{% block content %}
+{% bootstrap_css %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+<div class="container">
+<div class="ks-page-content">
+    <div class="ks-page-content-body">
+        <div class="ks-messenger">
+            <div class="ks-discussions">
+                <div class="ks-search">
+                    <div class="input-icon icon-right icon icon-lg icon-color-primary">
+                        <input id="input-group-icon-text" type="text" class="form-control" placeholder="Search">
+                        <span class="icon-addon">
+                        <span class="la la-search"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="ks-body ks-scrollable jspScrollable" data-auto-height="" style="height: 480px; overflow-y: auto; padding: 0px; width: 339px;" tabindex="0">
+                    <div class="jspContainer" style="width: 339px; height: 550px;">
+                        <div class="jspPane" style="padding: 0px; top: 0px; width: 329px;">
+                            <ul class="ks-items">
+                              {% for conversation in conversations %}
+                              <li class="ks-item">
+                                  <a href="{% url 'messenger:messages' conversation.user.username %}"
+                                    class="list-group-item{% if active == conversation.user.username %} active{% endif %}">
+                                    <span class="ks-avatar">
+                                     <img src="{{ conversation.user.profile.image.url }}" width="36" height="36">
+                                    </span>
+                                    <div class="ks-body">
+                                     <div class="ks-name">
+                                      {{ conversation.user.profile.get_screen_name }}
+                                      {% if conversation.unread > 0 %}
+                                         <div class="ks-item ks-unread">
+                                            <span class="badge pull-right">{{ conversation.unread }}</span>
+                                         </div>
+                                      {% endif %}                                      </div>
+<!--                                <div class="ks-message">Why didn't he come and talk to me himse...</div>-->
+                                    </div>
+                                  </a>
+                              </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="jspVerticalBar">
+                            <div class="jspCap jspCapTop"></div>
+                            <div class="jspTrack" style="height: 550px;">
+                                <div class="jspDrag" style="height: 261px;">
+                                    <div class="jspDragTop"></div>
+                                    <div class="jspDragBottom"></div>
+                                </div>
+                            </div>
+                            <div class="jspCap jspCapBottom"></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="page-header">
+                      <a href="{% url 'messenger:new_message' %}" class="btn btn btn-primary new-message"> <i class="fa fa-envelope"></i> New Message </a>
+                 </div>
+            </div>
+
+            <div class="ks-messages ks-messenger__messages">
+                <div class="ks-header">
+                    <div class="ks-description">
+                        <div class="ks-name">Your chat</div>
+                    </div>
+                </div>
+                <div class="ks-body ks-scrollable jspScrollable" data-auto-height="" data-reduce-height=".ks-footer" data-fix-height="32" style="height: 480px; overflow-y: auto; padding: 0px; width: 701px;" tabindex="0">
+                    <div class="jspContainer" style="width: 701px; height: 481px;">
+                        <div class="jspPane" style="padding: 0px; top: 0px; width: 691px;">
+                            <ul class="ks-items">
+                              {% for message in messages %}
+                                <li class="ks-item ks-self">
+                                    {% include 'messenger/messages.html' with message=message %}
+                                </li>
+                              {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="jspVerticalBar">
+                            <div class="jspCap jspCapTop"></div>
+                            <div class="jspTrack" style="height: 481px;">
+                                <div class="jspDrag" style="height: 206px;">
+                                    <div class="jspDragTop"></div>
+                                    <div class="jspDragBottom"></div>
+                                </div>
+                            </div>
+                            <div class="jspCap jspCapBottom"></div>
+                        </div>
+                    </div>
+                </div>
+                <form class="send-message" method="post" action="{% url 'messenger:send_message' %}" id="send">
+                  <div style="margin-top: .3em">
+                      {% csrf_token %}
+                      <input type="hidden" name="to" value="{{ active }}">
+                      <input class="form-control" type="text" name="message" placeholder="Type something..." maxlength="1000" autocomplete="off">
+                  </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

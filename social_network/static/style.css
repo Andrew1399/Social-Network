@@ -1,0 +1,181 @@
+body {
+    background: #F8F8F8 !important;
+}
+
+.nav {
+    border-radius: 0px !important;
+    padding: 10px 0 10px 0 !important;
+    background-color: #4c5fd7 !important;
+}
+
+.mb-7 {
+    margin-bottom: 7px !important;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
+}
+
+.mymodal {
+    height: 300px !important;
+    top: 200px !important;
+    font-size: 20px !important;
+}
+
+.mb-5 {
+    margin-bottom: 5px !important;
+}
+
+.w-big {
+  width: 250 !important;
+}
+
+.bwhite-lg {
+    background-color: transparent !important;
+}
+
+.bwhite-sn {
+    background-color: transparent !important;
+    width: 10px !important;
+}
+
+.comment-box {
+    display: none;
+}
+
+.conversation {
+  margin: 0;
+  padding: 0;
+}
+
+.conversation li {
+  list-style: none;
+  padding: .6em 0;
+}
+
+.conversation li h5 {
+  margin: 0;
+  margin-bottom: .2em;
+}
+
+.conversation li div {
+  margin-left: 50px;
+}
+
+.conversation .picture {
+  width: 40px;
+  border-radius: 5px;
+  float: left;
+}
+
+.conversation-portrait {
+  width: 20px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.typeahead, .tt-query, .tt-hint {
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  font-size: 1.2em;
+  height: 35px;
+  line-height: 35px;
+  outline: medium none;
+  padding: 4px 12px;
+  width: 300px;
+}
+.typeahead {
+  background-color: #FFFFFF;
+}
+.typeahead:focus {
+  border: 2px solid #0097CF;
+}
+.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+  color: #999999;
+}
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 8px;
+  padding: 8px 0;
+  width: 300px;
+}
+.tt-suggestion {
+  font-size: 1.2em;
+  line-height: 24px;
+  padding: 3px 20px;
+}
+.tt-suggestion.tt-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+
+
+.image-add {
+    width: 350px;
+    height:454px;
+    margin:8px;
+}
+
+.image-path {
+    max-width: 300px;
+    height: 250px;
+    border: #f1f1f1 solid 2px;
+    cursor:pointer;
+}
+
+.describe {
+    padding:4px;
+    width:auto;
+    height:100px;
+}
+
+div.images {
+    min-height: 550px;
+}
+
+.popup {
+	position: absolute;
+	height:100%;
+	width:100%;
+    top:0;
+	left:0;
+	display:none;
+	text-align:center;
+}
+
+.popup_bg {
+	background:rgba(0,0,0,0.4);
+	position:absolute;
+	z-index:1;
+	height:100%;
+	width:100%;
+}
+
+.popup_img {
+	position: relative;
+	margin:0 auto;
+	z-index:2;
+	max-height:94%;
+	max-width:94%;
+	margin:1% 0 0 0;
+}
+
+.buttons {
+    padding-bottom:50px;
+}
+
+.custom {
+    width:25
+
+
+
+
