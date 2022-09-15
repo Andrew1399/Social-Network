@@ -13,7 +13,7 @@ ___1) Clone git repository: git clone https://github.com/Andrew1399/Social-Netwo
 
 ___2) In the root of the project create .env___
 ```
-SECRET_KEY=django-insecure-_m_e-4h&%2yy%)%$wq+*2%)=i95(^krn@ok__26v97uq@th-_-
+SECRET_KEY=django-secure-_m_e-4h&%2yy%)%$wq+*2%)=i95(^krn@ok__26v97uq@th-_-
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 DJANGO_DEBUG=TRUE
 DB_NAME=network
