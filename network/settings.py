@@ -137,7 +137,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'localhost',            #--pg_db if docker-compose
+        'HOST': config('DB_HOST'),            #--pg_db if docker-compose
         'PORT': config('DB_PORT')
         }
 }
