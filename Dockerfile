@@ -10,4 +10,4 @@ RUN pip install --upgrade pip
 
 EXPOSE 8000
 
-CMD ["python", "manage.py"]
+CMD ["python", "manage.py", "runserver"]
